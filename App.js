@@ -1,20 +1,57 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { TextInput, Button, StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
+const App = () => {
+  const [texto, setTexto] = useState("");
+  const [islotes, setIslotes] = useState(0);
+
+  const handleIslotes = () => {
+    // Utilizamos una expresión regular para buscar letras iguales separadas por cualquier carácter
+    const regex = /(\w)\w*\1/gi;
+    const matches = texto.match(regex);
+
+    if (matches) {
+      setIslotes(matches.length);
+    } else {
+      setIslotes(0);
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Text>Cantidad de islotes: {islotes}</Text>
+
+      <TextInput 
+        style={styles.textInput} 
+        placeholder="Ingrese la frase" 
+        value={texto} 
+        onChangeText={(text) => setTexto(text)}
+      />
+
+      <Button
+        title="Ver islotes"
+        onPress={handleIslotes}
+      />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "lightblue",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  textInput: {
+    margin: 10,
+    borderColor: "pink",
+    borderWidth: 3,
+    height: 40,
+    width: "70%",
+    backgroundColor: "lightyellow"
   },
 });
+
+export default App;
