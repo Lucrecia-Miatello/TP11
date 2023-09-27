@@ -7,7 +7,6 @@ const App = () => {
   const [islotes, setIslotes] = useState(0);
 
   const handleIslotes = () => {
-    // Utilizamos una expresión regular para buscar letras iguales separadas por cualquier carácter
     const regex = /(\w)\w*\1/gi;
     const matches = texto.match(regex);
 
